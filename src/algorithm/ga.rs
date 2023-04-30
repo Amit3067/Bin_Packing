@@ -43,7 +43,7 @@ impl Algorithm{
     }
 
     ///start execution
-    pub fn run(&mut self) -> Solution {
+    pub fn run(&mut self) -> (Solution, f32, u32) {
         //initialize the upper bound on the number of bins
         self.u_b = self.bins.len()-1 as usize;
 
@@ -83,7 +83,7 @@ impl Algorithm{
                 sol.adapt(&self.items, &self.bins);
 
                 //reassign infeasible solutions using best-fit-decreasing algorithm
-                sol.best_fit(&self.items, &self.bins);
+                sol.best_fit(&self.items, &self.bins, self.u_b);
 
                 //update the minimum bin count
                 if sol.fitness(&self.items, &self.bins) > 0.0{
@@ -102,14 +102,15 @@ impl Algorithm{
         let res = self.get_best();
 
         //Output the result of the genetic algorithm
-        println!("Fitness = {:?}, Bins = {:?}", res.fitness(&self.items, &self.bins), res.get_bin_cnt());
-        return res;
+        // println!("Fitness = {:?}, Bins = {:?}", res.fitness(&self.items, &self.bins), res.get_bin_cnt());
+
+        return (res.clone(), res.fitness(&self.items, &self.bins), res.get_bin_cnt());
     }
 
     ///initialize the population for ga
     fn init(&mut self) -> () {
         self.population.clear();
-        self.population = (0..self.config.get_p_size()).map(|_| Solution::new(&self.items, &self.bins)).collect();
+        self.population = (0..self.config.get_p_size()).map(|_| Solution::new(&self.items, &self.bins, self.u_b)).collect();
     }
 
     ///perform reproduction operation

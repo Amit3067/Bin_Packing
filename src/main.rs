@@ -7,7 +7,7 @@ use structs::item::Item;
 use structs::bin::Bin;
 
 fn algorithm_test_120() {
-    let config = Config::new(2, 0.2, 1000,0.5);
+    let config = Config::new(2, 0.2, 1000,0.4);
 
     let mut my_algo = Algorithm::new(config).unwrap();
 
@@ -23,7 +23,18 @@ fn algorithm_test_120() {
 
     // println!("{:?}",my_algo);
 
-    my_algo.run();
+    println!("120 Items Problem");
+
+    let mut average_fitness : f32 = 0.0;
+    let mut average_bins : f32  = 0.0;
+
+    for i in 0..50{
+        let (sol, fitness, bins) = my_algo.run();
+        average_fitness += fitness;
+        average_bins += bins as f32;
+    }
+
+    println!("Average Fitness = {}, Average Number of Bins = {}", average_fitness / 50.0, (average_bins / 50.0).floor());
     
 }
 
@@ -42,7 +53,18 @@ fn algorithm_test_50() {
         my_algo.add_bin(Bin::new(100));
     }
 
-    my_algo.run();
+    println!("50 Items Problem");
+
+    let mut average_fitness : f32 = 0.0;
+    let mut average_bins : f32  = 0.0;
+
+    for i in 0..50{
+        let (sol, fitness, bins) = my_algo.run();
+        average_fitness += fitness;
+        average_bins += bins as f32;
+    }
+
+    println!("Average Fitness = {}, Average Number of Bins = {}", average_fitness / 50.0, (average_bins / 50.0).floor());
     
 }
 
@@ -64,7 +86,18 @@ fn algorithm_test_40() {
 
     // println!("{:?}",my_algo);
 
-    my_algo.run();
+    println!("40 Items Problem");
+
+    let mut average_fitness : f32 = 0.0;
+    let mut average_bins : f32  = 0.0;
+
+    for i in 0..50{
+        let (sol, fitness, bins) = my_algo.run();
+        average_fitness += fitness;
+        average_bins += bins as f32;
+    }
+
+    println!("Average Fitness = {}, Average Number of Bins = {}", average_fitness / 50.0, (average_bins / 50.0).floor());
     
 }
 
@@ -85,7 +118,18 @@ fn algorithm_test_20() {
 
     // println!("{:?}",my_algo);
 
-    my_algo.run();
+    println!("20 Items Problem");
+
+    let mut average_fitness : f32 = 0.0;
+    let mut average_bins : f32  = 0.0;
+
+    for i in 0..50{
+        let (sol, fitness, bins) = my_algo.run();
+        average_fitness += fitness;
+        average_bins += bins as f32;
+    }
+
+    println!("Average Fitness = {}, Average Number of Bins = {}", average_fitness / 50.0, (average_bins / 50.0).floor());
     
 }
 
@@ -106,7 +150,18 @@ fn algorithm_test_10() {
 
     // println!("{:?}",my_algo);
 
-    my_algo.run();
+    println!("10 Items Problem");
+
+    let mut average_fitness : f32 = 0.0;
+    let mut average_bins : f32  = 0.0;
+
+    for i in 0..50{
+        let (sol, fitness, bins) = my_algo.run();
+        average_fitness += fitness;
+        average_bins += bins as f32;
+    }
+
+    println!("Average Fitness = {}, Average Number of Bins = {}", average_fitness / 50.0, (average_bins / 50.0).floor());
     
 }
 
@@ -127,11 +182,22 @@ fn algorithm_test_9() {
 
     // println!("{:?}",my_algo);
 
-    my_algo.run();
+    println!("9 Items Problem");
+
+    let mut average_fitness : f32 = 0.0;
+    let mut average_bins : f32  = 0.0;
+
+    for i in 0..50{
+        let (sol, fitness, bins) = my_algo.run();
+        average_fitness += fitness;
+        average_bins += bins as f32;
+    }
+
+    println!("Average Fitness = {}, Average Number of Bins = {}", average_fitness / 50.0, (average_bins / 50.0).floor());
     
 }
 
-fn algorithm_test_4() {
+fn algorithm_test_4(){
     let config = Config::new(2, 0.2, 1000,0.5);
 
     let mut my_algo = Algorithm::new(config).unwrap();
@@ -148,9 +214,40 @@ fn algorithm_test_4() {
 
     // println!("{:?}",my_algo);
 
-    my_algo.run();
+    println!("4 Items Problem");
+
+    let mut average_fitness : f32 = 0.0;
+    let mut average_bins : f32  = 0.0;
+
+    for i in 0..50{
+        let (sol, fitness, bins) = my_algo.run();
+        average_fitness += fitness;
+        average_bins += bins as f32;
+    }
+
+    println!("Average Fitness = {}, Average Number of Bins = {}", average_fitness / 50.0, (average_bins / 50.0).floor());
 }
 
+fn algorithm_test() {
+    let config = Config::new(2, 0.2, 1000,0.5);
+
+    let mut my_algo = Algorithm::new(config).unwrap();
+
+    let weights = [5, 7, 3, 5, 12, 11, 10, 11, 9];
+
+    for weight in weights {
+        my_algo.add_item(Item::new(weight));
+    }
+
+    for _i in 0..9 {
+        my_algo.add_bin(Bin::new(14));
+    }
+
+    // println!("{:?}",my_algo);
+
+    my_algo.run();
+    
+}
 fn main() {
     self::algorithm_test_4();
     self::algorithm_test_9();
